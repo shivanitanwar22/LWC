@@ -1,0 +1,85 @@
+<template>
+    <div class="slds-p-left_small slds-m-right_small">
+    
+    <br>
+ 
+ <template if:true={showTable}>
+  
+    <lightning-card icon-name="standard:merge" title="Potential Duplicates "></lightning-card>
+ <lightning-datatable data={message} columns={columnTable}  key-field="Id"></lightning-datatable>-->
+
+    <div>
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table slds-border_left slds-border_right"
+            style="height:90%;width:100%;padding: bottom 200px;">
+            <thead>
+                <tr class="slds-line-height_reset">
+                   
+                    <th scope="col" >
+                        <div>
+                            
+                            <span class="slds-truncate">Lead Name</span>
+                        </div>
+                    </th>
+                
+                    <th scope="col">
+                        <div>
+                            
+                            <span class="slds-truncate">Email</span>
+                        </div>
+                    </th>
+
+                    <th scope="col">
+                        <div>
+                            
+                            <span class="slds-truncate">Company</span>
+                        </div>
+                    </th>
+                   
+            
+                    
+
+                </tr>
+            </thead>
+           <tbody>
+           <template for:each={fixeddate}  for:item="le"  for:index="index">
+                  
+                        <tr key = {le.Id}>
+                  
+                        
+                        <td>
+                            <a  data-id={le.Id} onclick={viewLead}  >{le.Name}</a>
+                            
+                         
+                        </td>
+                         
+                            
+                        <td >  {le.Email}
+                    
+                        </td>
+
+                        <td >  {le.Company}
+                    
+                        </td>
+                        
+                       
+                      
+            
+                        
+                       
+                       
+                    </tr>
+                </template>
+                
+            </tbody>
+           
+        </table>
+        </div>
+    </template>
+        <template if:false={showTable}>
+            <!--<lightning-icon icon-name="standard:merge" >  </lightning-icon>-->
+            <lightning-card icon-name="standard:merge" title="We found no Existing Leads for this Account "></lightning-card>
+            </template>
+        
+
+</div> 
+</template>

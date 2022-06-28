@@ -1,0 +1,22 @@
+<template>
+    <lightning-card title="Search Book">
+        <lightning-layout>
+            <lightning-layout-item>
+                <lightning-input type="Text" label="Book Name" onchange={createBookHandler}></lightning-input>
+                <lightning-input type="Number" label="ISBN Number" onchange={createBookHandler}></lightning-input>
+                <lightning-input type="Currency" label="Price" onchange={createBookHandler}></lightning-input>
+                <lightning-input type="Text" label="Author" onchange={createBookHandler}></lightning-input>
+                <lightning-button variant="Brand" label="Insert"></lightning-button>
+            </lightning-layout-item>
+            <lightning-layout-item>
+                <lightning-datatable
+                key-field="id"
+                data={data}
+                columns={columns}>
+
+                </lightning-datatable>
+            </lightning-layout-item>
+        </lightning-layout>
+    </lightning-card>
+    
+</template>

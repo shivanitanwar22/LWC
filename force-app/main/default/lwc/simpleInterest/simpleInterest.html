@@ -1,0 +1,116 @@
+<template>
+    <lightning-card  icon-name="standard:account" title="Contacts List2">
+        <div slot="footer">
+            <lightning-button  label="Add" variant="brand"  onclick={addRow}>
+            </lightning-button>&nbsp;
+            <lightning-button  label="Save" variant="brand" onclick={saveMultipleContacts}>
+            </lightning-button>
+        </div>  
+       
+    
+      <div class="slds-m-around_xx-small">
+    
+      </div>
+
+        <div>
+            <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+                
+                    <thead>
+                        <tr class = "slds-text-title_caps">
+                            <!--<th scope="col">
+                                <div class="slds-truncate" title="S.No">S.NO</div>
+                            </th>
+                           <th scope="col">
+                                <div class ="slds-truncate" title="FirstName">First Name</div>
+                            </th>-->
+                            <th scope="col">
+                                <div class ="slds-truncate" title="Name">Name</div>
+                            </th>
+                            <th scope="col">
+                                <div class ="slds-truncate" title="Email">Email</div>
+                            </th>
+                            <th scope="col">
+                                <div class ="slds-truncate" title="Principal">Principal</div>
+                            </th>
+                            <th scope="col">
+                                <div class ="slds-truncate" title="Rate">Rate</div>
+                            </th>
+                            <th scope="col">
+                                <div class ="slds-truncate" title="Time">Time</div>
+                            </th>
+                            <th scope="col">
+                                <div class ="slds-truncate" title="SimpleInterest">Simple Interest</div>
+                            </th>
+                           <!--<th scope="col">
+                                <div class ="slds-truncate" title="AccountId">AccountId</div>
+                            </th>-->
+                           
+                        </tr>
+                    
+                    </thead>
+                
+                
+                    <tbody>
+                        <template for:each={contactData}  for:item="contacts" for:index="index">
+                            <tr class="slds-hint-parent" key={contacts.Id}>
+                                
+                                <td>
+                                    
+                                        <lightning-input name='LastName' 
+                                            type="Text"  data-id={index} onchange={handleChangeName}  value={contacts.LastName}></lightning-input>
+                                    
+                                </td>
+                                <td >
+                                    
+                                        <lightning-input name='Email'  type="Email" onchange={handleChangeEmail}
+                                              data-id={index}  value={contacts.Email}></lightning-input>
+                            
+                                </td>
+    
+                                <td >
+                                
+                                        <lightning-input name='Principal__c' step="0.01"  type="number"  data-id={index}
+                                            value={contacts.Principal__c} onchange={handleChangePrin} ></lightning-input>
+                                
+                                </td>
+    
+                                <td >
+                                    
+                                        <lightning-input name='Rate__c' step="0.01"  data-id={index} onchange={handleChangeRate} type="number"  
+                                            value={contacts.Rate__c} ></lightning-input>
+                            
+                                </td>
+                                <td >
+            
+                                        <lightning-input name='Time__c' type="number" 
+                                            value={contacts.Time__c} onchange={handleChangeTime} data-id={index}></lightning-input>
+                                
+                                </td>
+    
+                                <td >
+                                    
+                                        <lightning-input disabled  value={contacts.Simple_Interest__c} name='Simple_Interest__c'  step="0.01" data-id={index}
+                                             type="number"  onchange={calculateSI} formatter="currency"></lightning-input>
+                                
+                                </td>
+    
+                              
+                                <td>
+                                    <lightning-icon icon-name="action:delete"   data-id={index} alternative-text="Click to Call" size="small" title="large size"  onclick={removeRow}>
+                                    </lightning-icon>
+                                </td>
+                            </tr>
+                        </template>
+                        
+                
+                    </tbody>
+               
+            </table>
+            
+        </div>
+
+      
+        </lightning-card>
+
+    
+</template>

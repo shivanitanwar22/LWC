@@ -1,0 +1,32 @@
+<template>
+  <lightning-card>
+     <lightning-layout multiple-rows>
+         <lightning-layout-item padding="horizontal-small">
+            <template if:false={errorMssg}>      
+              <template if:true={tableData}>
+              <lightning-datatable data={dataList} 
+              columns={columns} 
+              key-field="Id"
+              hide-checkbox-column="true"
+              ></lightning-datatable>
+             
+            <br>
+            <div class="slds-clearfix">
+              <div class="slds-float_right">
+                <lightning-button variant="Brand" label="Create Records" onclick={createRecord}></lightning-button>
+              </div>
+            </div>
+          </template>
+        </template>  
+         </lightning-layout-item>
+       </lightning-layout>
+      <template if:false={tableData}>
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </template>
+      <template if:true={errorMssg}>
+        <H1> No CSV file to display </H1>
+      </template>
+   </lightning-card>   
+ 
+ </template>
+ 

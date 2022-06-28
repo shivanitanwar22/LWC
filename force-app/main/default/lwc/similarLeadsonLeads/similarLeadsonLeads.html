@@ -1,0 +1,104 @@
+<template>
+  <lightning-card>
+    <div class="slds-p-left_small slds-m-right_small">
+      <br>
+        <template if:false={loaded}>
+          <lightning-spinner alternative-text="Loading"></lightning-spinner>
+        </template>
+    
+    <template if:true={loaded}>
+     <template if:true={showTable}>
+        <lightning-card icon-name="standard:merge" title="Potential Duplicates "></lightning-card>
+              <div class="slds-clearfix">
+                <div class="slds-float_right">
+                    <lightning-icon icon-name="custom:custom108" alternative-text="Select fields to display" onclick={showColumnSelectionWindow}></lightning-icon><br>&nbsp;
+
+                </div>
+              </div>
+              <br>&nbsp;
+                  <!--<lightning-button label="SElect fields to display" slot="actions" onclick={showColumnSelectionWindow}></lightning-button>-->
+       
+            <lightning-datatable    hide-checkbox-column   key-field="Id" data={objectData} columns={fieldsForCloumns}>
+            </lightning-datatable>
+      </template>
+          <template if:true={customDT}>
+            <div>
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table slds-border_left slds-border_right"
+               style="height:90%;width:100%;padding: bottom 200px;">
+                <thead>
+                  <tr class="slds-line-height_reset">
+                 
+                       <th scope="col" >
+                         <div>
+                          
+                          <span class="slds-truncate">Name</span>
+                         </div>
+                        </th>
+              
+                      <th scope="col">
+                      <div>
+                        
+                        <span class="slds-truncate">Email</span>
+                      </div>
+                      </th>
+  
+                  </tr>
+                </thead>
+                  <tbody>
+                  <template for:each={fixeddata}  for:item="le"  for:index="index">
+                
+                    <tr key = {le.Id}>
+                
+                      
+                      <td>
+                          <a  data-id={le.Id} onclick={viewLead}  >{le.Name}</a>
+                      </td>
+                        
+                      <td >  {le.Email}
+                  
+                      </td>
+  
+                    </tr>
+                  </template>
+              
+                   </tbody>
+         
+            </table>
+            </div>
+          </template>
+    </template>
+    
+    <template if:true={iscolumnWindow}>
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+              <header class="slds-modal__header">
+                <div class="slds-text-heading_large">Select Column for Data Table</div>
+              </header>
+              <div class="slds-modal__content slds-p-around_medium">
+                <lightning-dual-listbox name="fieldSelection"
+                            label="Select Fields (at least 5 and at most 10)"
+                            source-label="Available Fields"
+                            selected-label="Selected Field"
+                            field-level-help="Select fields which you want to see in data table."
+                            options={allFields}
+                            min={minField}
+                            max={maxField}
+                            value={allSelectedField}
+
+                            required-options={requiredOptions}
+                            onchange={updateSelectedColumns}></lightning-dual-listbox>
+              </div>
+              <footer class="slds-modal__footer">
+                <lightning-button name="cancelAction" class="slds-p-around_x-small" label="Cancel" onclick={closeModel}></lightning-button>
+                <lightning-button name="saveAction"  class="slds-p-around_x-small" label="Save" onclick={closeModel} variant="brand"></lightning-button>
+              </footer>
+            </div>
+          </section>
+          
+    </template>
+    <template if:false={showTable}>
+      <lightning-card icon-name="standard:merge" title="We found no Existing Leads with same domain"></lightning-card>
+      </template>
+  </div>  
+  </lightning-card>
+</template>
